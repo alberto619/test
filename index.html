@@ -2559,8 +2559,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 <a id="mobile-step2-v19"
    class="mobile-v19-cta"
-   href="https://pay.hotmart.com/L106914038U"
- target="_blank" rel="noopener">
+   href="https://pay.hotmart.com/L106914038U" target="_blank" rel="noopener">
   <span class="m19-kicker">PRECIO DE INTRODUCCIÓN</span>
   <span class="m19-main">EMPEZAR POR $249 MXN →</span>
 </a>
@@ -2624,18 +2623,16 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
 
-<script id="checkout-tracking-v28">
+
+
+
+<script id="checkout-tracking-v30">
 (function(){
-  let checkoutSent = false;
-
-  function findHotmartLink(target){
-    if(!target || !target.closest) return null;
-    return target.closest('a[href*="pay.hotmart.com"]');
-  }
-
-  function sendCheckout(){
-    if(checkoutSent) return;
-    checkoutSent = true;
+  document.addEventListener('pointerdown', function(ev){
+    const a = ev.target && ev.target.closest
+      ? ev.target.closest('a[href*="pay.hotmart.com"]')
+      : null;
+    if(!a) return;
 
     try{
       if(typeof fbq === 'function'){
@@ -2646,52 +2643,6 @@ document.addEventListener('DOMContentLoaded', function(){
         });
       }
     }catch(e){}
-
-    /* Permite otro intento si el usuario vuelve a la página y prueba otra vez */
-    setTimeout(function(){ checkoutSent = false; }, 2500);
-  }
-
-  /* Se manda ANTES del click/navegación. */
-  document.addEventListener('pointerdown', function(ev){
-    const a = findHotmartLink(ev.target);
-    if(!a) return;
-    sendCheckout();
-  }, true);
-
-  /* Fallback para navegadores viejos/touch peculiares. */
-  document.addEventListener('touchstart', function(ev){
-    const a = findHotmartLink(ev.target);
-    if(!a) return;
-    sendCheckout();
-  }, {capture:true, passive:true});
-
-  document.addEventListener('click', function(ev){
-    const a = findHotmartLink(ev.target);
-    if(!a) return;
-
-    ev.preventDefault();
-    ev.stopImmediatePropagation();
-
-    sendCheckout();
-
-    const destination = a.href;
-
-    /* Apertura explícita en otra pestaña. */
-    const newTab = window.open(destination, '_blank', 'noopener');
-
-    /* Si el navegador bloquea popups, usamos el enlace normal como respaldo. */
-    if(!newTab){
-      const fallback = document.createElement('a');
-      fallback.href = destination;
-      fallback.target = '_blank';
-      fallback.rel = 'noopener';
-      fallback.style.display = 'none';
-      document.body.appendChild(fallback);
-      fallback.click();
-      fallback.remove();
-    }
-
-    return false;
   }, true);
 })();
 </script>
