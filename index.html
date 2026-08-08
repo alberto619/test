@@ -2261,19 +2261,7 @@ details p{color:var(--muted);line-height:1.6;margin-top:12px}
   <div class="wrap">© 2026 Alberto Amescua · Método Reinicio 14 · Uso personal</div>
 </footer>
 
-<script>
-document.querySelectorAll('.js-buy').forEach(function(btn){
-  btn.addEventListener('click',function(){
-    try{
-      if(typeof fbq === 'function') fbq('track','InitiateCheckout',{
-        content_name:'Metodo Reinicio 14',
-        value:249,
-        currency:'MXN'
-      });
-    }catch(e){}
-  });
-});
-</script>
+
 
 
 
@@ -2452,15 +2440,7 @@ document.addEventListener('DOMContentLoaded', function(){
       return;
     }
 
-    try{
-      if(typeof fbq === 'function'){
-        fbq('track','InitiateCheckout',{
-          content_name:'Metodo Reinicio 14',
-          value:249,
-          currency:'MXN'
-        });
-      }
-    }catch(err){}
+
   });
 
   let raf = null;
@@ -2564,15 +2544,7 @@ document.addEventListener('DOMContentLoaded', function(){
     }
 
     /* Segundo clic: ahora sí intención real de checkout. */
-    try{
-      if(typeof fbq === 'function'){
-        fbq('track','InitiateCheckout',{
-          content_name:'Metodo Reinicio 14',
-          value:249,
-          currency:'MXN'
-        });
-      }
-    }catch(err){}
+
   }, true);
 
   checkPosition();
@@ -2590,7 +2562,7 @@ document.addEventListener('DOMContentLoaded', function(){
    href="https://pay.hotmart.com/L106914038U"
    target="_blank"
    rel="noopener"
-   onclick="try{if(typeof fbq==='function')fbq('track','InitiateCheckout',{content_name:'Metodo Reinicio 14',value:249,currency:'MXN'});}catch(e){}">
+>
   <span class="m19-kicker">PRECIO DE INTRODUCCIÓN</span>
   <span class="m19-main">EMPEZAR POR $249 MXN →</span>
 </a>
@@ -2638,6 +2610,52 @@ document.addEventListener('DOMContentLoaded', function(){
       }
     }catch(e){}
   },60000);
+})();
+</script>
+
+
+<script id="checkout-tracking-v26">
+(function(){
+  const HOTMART_HOST = 'pay.hotmart.com';
+  let locked = false;
+
+  function isHotmartLink(a){
+    if(!a || !a.href) return false;
+    try{
+      return new URL(a.href, location.href).hostname === HOTMART_HOST;
+    }catch(e){
+      return a.href.indexOf('pay.hotmart.com') !== -1;
+    }
+  }
+
+  document.addEventListener('click', function(ev){
+    const a = ev.target && ev.target.closest ? ev.target.closest('a') : null;
+    if(!isHotmartLink(a)) return;
+
+    ev.preventDefault();
+    ev.stopImmediatePropagation();
+
+    if(locked) return false;
+    locked = true;
+
+    const destination = a.href;
+
+    try{
+      if(typeof fbq === 'function'){
+        fbq('track','InitiateCheckout',{
+          content_name:'Metodo Reinicio 14',
+          value:249,
+          currency:'MXN'
+        });
+      }
+    }catch(e){}
+
+    setTimeout(function(){
+      window.location.href = destination;
+    }, 450);
+
+    return false;
+  }, true);
 })();
 </script>
 
