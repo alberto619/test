@@ -2568,13 +2568,18 @@ document.addEventListener('DOMContentLoaded', function(){
 </a>
 
 
-<script id="meta-tracking-restaurado">
-/* Tracking restaurado desde la versión que sí registraba actividad en Meta.
-   NO modifica diseño, imágenes, botones flotantes ni navegación. */
+
+
+
+
+
+
+<script id="meta-tracking-restaurado-v27">
 (function(){
   let scroll50Sent = false;
+  let engagedSent = false;
 
-  function sendScroll50(){
+  function checkScroll50(){
     if(scroll50Sent) return;
 
     const doc = document.documentElement;
@@ -2597,48 +2602,32 @@ document.addEventListener('DOMContentLoaded', function(){
     }
   }
 
-  window.addEventListener('scroll', sendScroll50, {passive:true});
-  document.addEventListener('scroll', sendScroll50, {passive:true});
-  window.addEventListener('touchmove', sendScroll50, {passive:true});
-  window.addEventListener('resize', sendScroll50, {passive:true});
-  sendScroll50();
-
-  setTimeout(function(){
+  function sendEngaged(){
+    if(engagedSent) return;
+    engagedSent = true;
     try{
       if(typeof fbq === 'function'){
         fbq('trackCustom','EngagedVisitor');
       }
     }catch(e){}
-  },60000);
+  }
+
+  window.addEventListener('scroll', checkScroll50, {passive:true});
+  document.addEventListener('scroll', checkScroll50, {passive:true});
+  window.addEventListener('touchmove', checkScroll50, {passive:true});
+  window.addEventListener('resize', checkScroll50, {passive:true});
+  checkScroll50();
+
+  setTimeout(sendEngaged, 60000);
 })();
 </script>
 
 
-<script id="checkout-tracking-v26">
+<script id="checkout-tracking-v27">
 (function(){
-  const HOTMART_HOST = 'pay.hotmart.com';
-  let locked = false;
-
-  function isHotmartLink(a){
-    if(!a || !a.href) return false;
-    try{
-      return new URL(a.href, location.href).hostname === HOTMART_HOST;
-    }catch(e){
-      return a.href.indexOf('pay.hotmart.com') !== -1;
-    }
-  }
-
   document.addEventListener('click', function(ev){
-    const a = ev.target && ev.target.closest ? ev.target.closest('a') : null;
-    if(!isHotmartLink(a)) return;
-
-    ev.preventDefault();
-    ev.stopImmediatePropagation();
-
-    if(locked) return false;
-    locked = true;
-
-    const destination = a.href;
+    const a = ev.target && ev.target.closest ? ev.target.closest('a[href*="pay.hotmart.com"]') : null;
+    if(!a) return;
 
     try{
       if(typeof fbq === 'function'){
@@ -2649,12 +2638,6 @@ document.addEventListener('DOMContentLoaded', function(){
         });
       }
     }catch(e){}
-
-    setTimeout(function(){
-      window.location.href = destination;
-    }, 450);
-
-    return false;
   }, true);
 })();
 </script>
