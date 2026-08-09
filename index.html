@@ -1753,6 +1753,24 @@ details p{color:var(--muted);line-height:1.6;margin-top:12px}
 }
 
 </style>
+
+<style id="sales-quiz-smart-v2-style">
+.sales-quiz-bridge{padding:20px 16px 30px}
+.sales-quiz-bridge__inner{max-width:720px;margin:auto;padding:22px 18px;text-align:center;border:1px solid rgba(52,91,75,.18);border-radius:24px;background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(248,244,233,.97));box-shadow:0 14px 38px rgba(38,66,55,.09)}
+.sales-quiz-bridge__eyebrow{display:block;margin-bottom:8px;font-size:.70rem;font-weight:900;letter-spacing:.12em;color:#80673a}
+.sales-quiz-bridge h2{margin:0 0 8px;color:#24483d;font-size:clamp(1.2rem,5vw,1.65rem);line-height:1.08}
+.sales-quiz-bridge p{margin:0 auto 15px;max-width:560px;color:#4d5b55;line-height:1.45}
+.sales-quiz-bridge__btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;max-width:520px;min-height:56px;margin:0 auto 9px;padding:13px 17px;border-radius:18px;text-decoration:none!important;color:#fff!important;font-weight:900;letter-spacing:.025em;background:linear-gradient(180deg,#4f7465,#355f50 52%,#24483d);border:1px solid rgba(255,255,255,.48);box-shadow:inset 0 2px 0 rgba(255,255,255,.22),0 5px 0 #1d3f35,0 12px 24px rgba(31,73,60,.18)}
+.sales-quiz-bridge small{color:#6e766f;font-size:.72rem}
+
+/* Solo usuarios con resultado guardado */
+.saved-result-fab{position:fixed;left:max(14px,env(safe-area-inset-left));bottom:calc(88px + env(safe-area-inset-bottom));z-index:9997;display:none;align-items:center;gap:8px;text-decoration:none!important}
+.saved-result-fab.is-visible{display:flex}
+.saved-result-fab__orb{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:21px;font-weight:900;background:radial-gradient(circle at 30% 22%,rgba(255,255,255,.55) 0 7%,rgba(255,255,255,.10) 8% 24%,transparent 25%),linear-gradient(145deg,#557a69,#24483d);border:2px solid rgba(255,255,255,.82);box-shadow:inset 0 2px 0 rgba(255,255,255,.28),0 5px 0 #1d3f35,0 12px 25px rgba(31,73,60,.24)}
+.saved-result-fab__label{padding:9px 11px;border-radius:13px;background:rgba(255,252,244,.96);border:1px solid rgba(52,91,75,.18);box-shadow:0 8px 20px rgba(38,66,55,.14);color:#24483d;font-size:.68rem;font-weight:950;line-height:1.05;text-align:left}
+@media(max-width:380px){.saved-result-fab__label{display:none}}
+</style>
+
 </head>
 
 <body>
@@ -1785,6 +1803,14 @@ details p{color:var(--muted);line-height:1.6;margin-top:12px}
         <a class="cta js-buy" href="https://pay.hotmart.com/L106914038U" target="_blank" rel="noopener">
           QUIERO EMPEZAR MI REINICIO
         </a>
+<section class="sales-quiz-bridge quiz-new-user-only" id="quiz-bridge-mid">
+<div class="sales-quiz-bridge__inner">
+<span class="sales-quiz-bridge__eyebrow">¿TODAVÍA NO ESTÁS SEGURO?</span>
+<h2>Descubre qué está frenando tu progreso</h2>
+<p>Haz el diagnóstico gratuito y descubre tu perfil antes de decidir.</p>
+<a class="sales-quiz-bridge__btn sales-to-quiz" href="https://alberto619.github.io/quiz-reinicio/">DESCUBRIR MI PERFIL GRATIS <span>→</span></a>
+<small>6 preguntas · resultado inmediato · sin compromiso</small>
+</div></section>
         <div class="cta-sub">Acceso inmediato · Pago procesado por Hotmart</div>
       </div>
 
@@ -2257,6 +2283,15 @@ details p{color:var(--muted);line-height:1.6;margin-top:12px}
   </div>
 </section>
 
+
+<section class="sales-quiz-bridge quiz-new-user-only" id="quiz-bridge-final">
+<div class="sales-quiz-bridge__inner">
+<span class="sales-quiz-bridge__eyebrow">¿TODAVÍA NO ESTÁS SEGURO?</span>
+<h2>Descubre qué está frenando tu progreso</h2>
+<p>Haz el diagnóstico gratuito y descubre tu perfil antes de decidir.</p>
+<a class="sales-quiz-bridge__btn sales-to-quiz" href="https://alberto619.github.io/quiz-reinicio/">DESCUBRIR MI PERFIL GRATIS <span>→</span></a>
+<small>6 preguntas · resultado inmediato · sin compromiso</small>
+</div></section>
 <footer class="footer">
   <div class="wrap">© 2026 Alberto Amescua · Método Reinicio 14 · Uso personal</div>
 </footer>
@@ -2675,6 +2710,40 @@ document.addEventListener('DOMContentLoaded', function(){
     var a = ev.target && ev.target.closest ? ev.target.closest('a[href]') : null;
     if(isCheckoutLink(a)) sendSignals(a);
   }, true);
+})();
+</script>
+
+<a id="savedResultFab" class="saved-result-fab sales-to-quiz" href="https://alberto619.github.io/quiz-reinicio/" aria-label="Volver a mi resultado">
+<span class="saved-result-fab__orb">↺</span>
+<span class="saved-result-fab__label">TU RESULTADO<br>RECIBIR MI MAPA</span>
+</a>
+
+<script id="sales-quiz-smart-v2-logic">
+(function(){
+  var KEY='reinicio14_quiz_result_v9';
+  var saved=null;
+  try{saved=localStorage.getItem(KEY);}catch(e){}
+
+  var fab=document.getElementById('savedResultFab');
+  var newBlocks=document.querySelectorAll('.quiz-new-user-only');
+
+  if(saved){
+    if(fab) fab.classList.add('is-visible');
+    newBlocks.forEach(function(el){el.style.display='none';});
+  } else {
+    if(fab) fab.classList.remove('is-visible');
+    newBlocks.forEach(function(el){el.style.display='block';});
+  }
+
+  document.querySelectorAll('.sales-to-quiz').forEach(function(el){
+    el.addEventListener('click',function(){
+      try{
+        if(typeof window.fbq==='function'){
+          window.fbq('trackCustom','SalesToQuiz',{has_saved_result:!!saved});
+        }
+      }catch(e){}
+    },true);
+  });
 })();
 </script>
 
