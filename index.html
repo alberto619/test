@@ -2697,25 +2697,40 @@ document.addEventListener('DOMContentLoaded', function(){
 </script>
 
 
-<!-- Tracking final de intención real de checkout -->
-<script id="reinicio14-checkout-tracking">
+<!-- Checkout tracking corregido: espera el envío antes de salir a Hotmart -->
+<script id="reinicio14-checkout-tracking-v2">
 (function(){
+  var HOTMART = 'https://pay.hotmart.com/L106914038U';
+  var locked = false;
+
   document.addEventListener('click', function(e){
-    var a=e.target.closest && e.target.closest('a[href]');
+    var a = e.target.closest && e.target.closest('a[href]');
     if(!a) return;
-    var href=a.getAttribute('href')||'';
-    if(href.indexOf('https://pay.hotmart.com/L106914038U')===0){
-      try{
-        if(typeof fbq==='function'){
-          fbq('track','InitiateCheckout',{
-            content_name:'Metodo Reinicio 14',
-            content_type:'product',
-            value:249.00,
-            currency:'MXN'
-          });
-        }
-      }catch(err){}
-    }
+
+    var href = a.getAttribute('href') || '';
+    if(href.indexOf(HOTMART) !== 0) return;
+
+    e.preventDefault();
+    e.stopImmediatePropagation();
+
+    if(locked) return;
+    locked = true;
+
+    try{
+      if(typeof window.fbq === 'function'){
+        window.fbq('track','InitiateCheckout',{
+          content_name:'Metodo Reinicio 14',
+          content_type:'product',
+          value:249.00,
+          currency:'MXN'
+        });
+      }
+    }catch(err){}
+
+    /* Conserva el destino exacto del botón; sólo retrasa la salida para que Meta alcance a enviar. */
+    setTimeout(function(){
+      window.location.href = href;
+    }, 900);
   }, true);
 })();
 </script>
