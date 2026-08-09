@@ -1782,7 +1782,7 @@ details p{color:var(--muted);line-height:1.6;margin-top:12px}
           <div class="hero-point">✓ <span><b>Con protocolos de rescate</b> para volver en la siguiente decisión.</span></div>
         </div>
 
-        <a class="cta js-buy" href="https://pay.hotmart.com/L106914038U" data-checkout-source="hero" onclick="try{if(typeof fbq==='function'){fbq('track','InitiateCheckout',{content_name:'Metodo Reinicio 14',content_category:'hero',value:249,currency:'MXN'});}}catch(e){}" target="_blank" rel="noopener">
+        <a class="cta js-buy" href="https://pay.hotmart.com/L106914038U" target="_blank" rel="noopener">
           QUIERO EMPEZAR MI REINICIO
         </a>
         <div class="cta-sub">Acceso inmediato · Pago procesado por Hotmart</div>
@@ -1890,7 +1890,7 @@ details p{color:var(--muted);line-height:1.6;margin-top:12px}
         “Completar 14 días no cambió solo mi cuerpo. Cambió lo que creía posible.”
         <br><span style="color:var(--orange)">— Alberto Amescua</span>
       </div>
-      <a class="cta js-buy section-cta" href="https://pay.hotmart.com/L106914038U" data-checkout-source="intermedio" onclick="try{if(typeof fbq==='function'){fbq('track','InitiateCheckout',{content_name:'Metodo Reinicio 14',content_category:'intermedio',value:249,currency:'MXN'});}}catch(e){}" target="_blank" rel="noopener">
+      <a class="cta js-buy section-cta" href="https://pay.hotmart.com/L106914038U" target="_blank" rel="noopener">
         QUIERO EMPEZAR MI REINICIO
       </a>
     </div>
@@ -2180,7 +2180,7 @@ details p{color:var(--muted);line-height:1.6;margin-top:12px}
     <div class="offer-note">Pago único · Sin mensualidades · Acceso inmediato</div>
   </div>
 
-  <a class="cta js-buy" href="https://pay.hotmart.com/L106914038U" data-checkout-source="oferta" onclick="try{if(typeof fbq==='function'){fbq('track','InitiateCheckout',{content_name:'Metodo Reinicio 14',content_category:'oferta',value:249,currency:'MXN'});}}catch(e){}" target="_blank" rel="noopener">QUIERO APROVECHAR EL PRECIO DE INTRODUCCIÓN — $249 MXN</a>
+  <a class="cta js-buy" href="https://pay.hotmart.com/L106914038U" target="_blank" rel="noopener">QUIERO APROVECHAR EL PRECIO DE INTRODUCCIÓN — $249 MXN</a>
 
   <div class="offer-trust">
     <span>✓ Entrega automática por Hotmart</span>
@@ -2251,7 +2251,7 @@ details p{color:var(--muted);line-height:1.6;margin-top:12px}
       Dentro de 14 días puedes volver a decir “otra vez fallé” o puedes tener una racha visible
       que demuestre que ya no reaccionas igual ante un tropiezo.
     </p>
-    <a class="cta js-buy" href="https://pay.hotmart.com/L106914038U" data-checkout-source="final" onclick="try{if(typeof fbq==='function'){fbq('track','InitiateCheckout',{content_name:'Metodo Reinicio 14',content_category:'final',value:249,currency:'MXN'});}}catch(e){}" target="_blank" rel="noopener">
+    <a class="cta js-buy" href="https://pay.hotmart.com/L106914038U" target="_blank" rel="noopener">
       QUIERO COMPLETAR MIS 14 DÍAS
     </a>
   </div>
@@ -2440,16 +2440,7 @@ document.addEventListener('DOMContentLoaded', function(){
       return;
     }
 
-    try{
-      if(typeof fbq === 'function'){
-        fbq('track','InitiateCheckout',{
-          content_name:'Metodo Reinicio 14',
-          content_category:'flotante_desktop',
-          value:249,
-          currency:'MXN'
-        });
-      }
-    }catch(err){}
+
   });
 
   let raf = null;
@@ -2568,7 +2559,8 @@ document.addEventListener('DOMContentLoaded', function(){
 
 <a id="mobile-step2-v19"
    class="mobile-v19-cta"
-   href="https://pay.hotmart.com/L106914038U" data-checkout-source="flotante_mobile" onclick="try{if(typeof fbq==='function'){fbq('track','InitiateCheckout',{content_name:'Metodo Reinicio 14',content_category:'flotante_mobile',value:249,currency:'MXN'});}}catch(e){}" target="_blank" rel="noopener">
+   href="https://pay.hotmart.com/L106914038U"
+ target="_blank" rel="noopener">
   <span class="m19-kicker">PRECIO DE INTRODUCCIÓN</span>
   <span class="m19-main">EMPEZAR POR $249 MXN →</span>
 </a>
@@ -2632,10 +2624,77 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
 
+<script id="checkout-tracking-v28">
+(function(){
+  let checkoutSent = false;
 
+  function findHotmartLink(target){
+    if(!target || !target.closest) return null;
+    return target.closest('a[href*="pay.hotmart.com"]');
+  }
 
+  function sendCheckout(){
+    if(checkoutSent) return;
+    checkoutSent = true;
 
+    try{
+      if(typeof fbq === 'function'){
+        fbq('track','InitiateCheckout',{
+          content_name:'Metodo Reinicio 14',
+          value:249,
+          currency:'MXN'
+        });
+      }
+    }catch(e){}
 
+    /* Permite otro intento si el usuario vuelve a la página y prueba otra vez */
+    setTimeout(function(){ checkoutSent = false; }, 2500);
+  }
+
+  /* Se manda ANTES del click/navegación. */
+  document.addEventListener('pointerdown', function(ev){
+    const a = findHotmartLink(ev.target);
+    if(!a) return;
+    sendCheckout();
+  }, true);
+
+  /* Fallback para navegadores viejos/touch peculiares. */
+  document.addEventListener('touchstart', function(ev){
+    const a = findHotmartLink(ev.target);
+    if(!a) return;
+    sendCheckout();
+  }, {capture:true, passive:true});
+
+  document.addEventListener('click', function(ev){
+    const a = findHotmartLink(ev.target);
+    if(!a) return;
+
+    ev.preventDefault();
+    ev.stopImmediatePropagation();
+
+    sendCheckout();
+
+    const destination = a.href;
+
+    /* Apertura explícita en otra pestaña. */
+    const newTab = window.open(destination, '_blank', 'noopener');
+
+    /* Si el navegador bloquea popups, usamos el enlace normal como respaldo. */
+    if(!newTab){
+      const fallback = document.createElement('a');
+      fallback.href = destination;
+      fallback.target = '_blank';
+      fallback.rel = 'noopener';
+      fallback.style.display = 'none';
+      document.body.appendChild(fallback);
+      fallback.click();
+      fallback.remove();
+    }
+
+    return false;
+  }, true);
+})();
+</script>
 
 </body>
 </html>
