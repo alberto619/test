@@ -2620,67 +2620,60 @@ document.addEventListener('DOMContentLoaded', function(){
 })();
 </script>
 
-<!-- CHECKOUT FINAL: una sola fuente de tracking para los 5 accesos a Hotmart -->
-<script id="checkout-tracking-final">
+<!-- Tracking de checkout sin bloquear clicks ni interferir con Meta -->
+<script id="checkout-tracking-clean">
 (function(){
-  var PIXEL_ID = '1698998988025454';
-  var HOTMART = 'https://pay.hotmart.com/L106914038U';
-  var lock = false;
+  var HOTMART_HOST = 'pay.hotmart.com';
+  var HOTMART_PATH = '/L106914038U';
+  var lastSignalAt = 0;
 
-  function sendSignals(link){
+  function isCheckoutLink(a){
+    if(!a || !a.href) return false;
+    try{
+      var u = new URL(a.href, window.location.href);
+      return u.hostname === HOTMART_HOST && u.pathname.indexOf(HOTMART_PATH) === 0;
+    }catch(e){
+      return a.href.indexOf('https://pay.hotmart.com/L106914038U') === 0;
+    }
+  }
+
+  function sendSignals(a){
+    var now = Date.now();
+    if(now - lastSignalAt < 800) return;
+    lastSignalAt = now;
+
     var params = {
       content_name: 'Metodo Reinicio 14',
       content_type: 'product',
       value: 249.00,
       currency: 'MXN',
-      button_text: (link.textContent || '').replace(/\s+/g,' ').trim().slice(0,120)
+      button_text: (a.textContent || '').replace(/\s+/g,' ').trim().slice(0,120)
     };
 
-    if(typeof window.fbq === 'function'){
-      /* Evento estándar para optimización */
-      window.fbq('track','InitiateCheckout', params);
-
-      /* Señal custom explícita para verla fácil en Probar eventos */
-      window.fbq('trackCustom','Comprar', params);
-    }
+    try{
+      if(typeof window.fbq === 'function'){
+        window.fbq('track','InitiateCheckout', params);
+        window.fbq('trackCustom','Comprar', params);
+      }
+    }catch(e){}
   }
 
+  /* pointerdown sucede antes de que el enlace abra Hotmart */
+  document.addEventListener('pointerdown', function(ev){
+    var a = ev.target && ev.target.closest ? ev.target.closest('a[href]') : null;
+    if(isCheckoutLink(a)) sendSignals(a);
+  }, true);
+
+  /* Fallback para Safari/touch */
+  document.addEventListener('touchstart', function(ev){
+    var a = ev.target && ev.target.closest ? ev.target.closest('a[href]') : null;
+    if(isCheckoutLink(a)) sendSignals(a);
+  }, {capture:true, passive:true});
+
+  /* Fallback final. NO bloquea ni modifica la navegación */
   document.addEventListener('click', function(ev){
-    var link = ev.target.closest && ev.target.closest('a[href]');
-    if(!link) return;
-
-    var href = link.href || link.getAttribute('href') || '';
-    if(href.indexOf(HOTMART) !== 0) return;
-
-    ev.preventDefault();
-    ev.stopImmediatePropagation();
-
-    if(lock) return;
-    lock = true;
-
-    /* Abrimos la pestaña AHORA para que Safari/iPhone no la bloquee. */
-    var checkoutTab = null;
-    try{
-      checkoutTab = window.open('about:blank','_blank');
-    }catch(e){}
-
-    try{
-      sendSignals(link);
-    }catch(e){}
-
-    /* Damos tiempo real al pixel para enviar antes de cargar Hotmart. */
-    setTimeout(function(){
-      try{
-        if(checkoutTab && !checkoutTab.closed){
-          checkoutTab.location.href = href;
-        }else{
-          window.location.href = href;
-        }
-      }catch(e){
-        window.location.href = href;
-      }
-      lock = false;
-    }, 1200);
+    var a = ev.target && ev.target.closest ? ev.target.closest('a[href]') : null;
+    if(isCheckoutLink(a)) sendSignals(a);
   }, true);
 })();
 </script>
