@@ -2620,117 +2620,67 @@ document.addEventListener('DOMContentLoaded', function(){
 })();
 </script>
 
-
-
-
-
-<script id="checkout-tracking-v28">
+<!-- CHECKOUT FINAL: una sola fuente de tracking para los 5 accesos a Hotmart -->
+<script id="checkout-tracking-final">
 (function(){
-  let checkoutSent = false;
+  var PIXEL_ID = '1698998988025454';
+  var HOTMART = 'https://pay.hotmart.com/L106914038U';
+  var lock = false;
 
-  function findHotmartLink(target){
-    if(!target || !target.closest) return null;
-    return target.closest('a[href*="pay.hotmart.com"]');
+  function sendSignals(link){
+    var params = {
+      content_name: 'Metodo Reinicio 14',
+      content_type: 'product',
+      value: 249.00,
+      currency: 'MXN',
+      button_text: (link.textContent || '').replace(/\s+/g,' ').trim().slice(0,120)
+    };
+
+    if(typeof window.fbq === 'function'){
+      /* Evento estándar para optimización */
+      window.fbq('track','InitiateCheckout', params);
+
+      /* Señal custom explícita para verla fácil en Probar eventos */
+      window.fbq('trackCustom','Comprar', params);
+    }
   }
-
-  function sendCheckout(){
-    if(checkoutSent) return;
-    checkoutSent = true;
-
-    try{
-      if(typeof fbq === 'function'){
-        fbq('track','InitiateCheckout',{
-          content_name:'Metodo Reinicio 14',
-          value:249,
-          currency:'MXN'
-        });
-      }
-    }catch(e){}
-
-    /* Permite otro intento si el usuario vuelve a la página y prueba otra vez */
-    setTimeout(function(){ checkoutSent = false; }, 2500);
-  }
-
-  /* Se manda ANTES del click/navegación. */
-  document.addEventListener('pointerdown', function(ev){
-    const a = findHotmartLink(ev.target);
-    if(!a) return;
-    sendCheckout();
-  }, true);
-
-  /* Fallback para navegadores viejos/touch peculiares. */
-  document.addEventListener('touchstart', function(ev){
-    const a = findHotmartLink(ev.target);
-    if(!a) return;
-    sendCheckout();
-  }, {capture:true, passive:true});
 
   document.addEventListener('click', function(ev){
-    const a = findHotmartLink(ev.target);
-    if(!a) return;
+    var link = ev.target.closest && ev.target.closest('a[href]');
+    if(!link) return;
+
+    var href = link.href || link.getAttribute('href') || '';
+    if(href.indexOf(HOTMART) !== 0) return;
 
     ev.preventDefault();
     ev.stopImmediatePropagation();
 
-    sendCheckout();
+    if(lock) return;
+    lock = true;
 
-    const destination = a.href;
-
-    /* Apertura explícita en otra pestaña. */
-    const newTab = window.open(destination, '_blank', 'noopener');
-
-    /* Si el navegador bloquea popups, usamos el enlace normal como respaldo. */
-    if(!newTab){
-      const fallback = document.createElement('a');
-      fallback.href = destination;
-      fallback.target = '_blank';
-      fallback.rel = 'noopener';
-      fallback.style.display = 'none';
-      document.body.appendChild(fallback);
-      fallback.click();
-      fallback.remove();
-    }
-
-    return false;
-  }, true);
-})();
-</script>
-
-
-<!-- Checkout tracking corregido: espera el envío antes de salir a Hotmart -->
-<script id="reinicio14-checkout-tracking-v2">
-(function(){
-  var HOTMART = 'https://pay.hotmart.com/L106914038U';
-  var locked = false;
-
-  document.addEventListener('click', function(e){
-    var a = e.target.closest && e.target.closest('a[href]');
-    if(!a) return;
-
-    var href = a.getAttribute('href') || '';
-    if(href.indexOf(HOTMART) !== 0) return;
-
-    e.preventDefault();
-    e.stopImmediatePropagation();
-
-    if(locked) return;
-    locked = true;
+    /* Abrimos la pestaña AHORA para que Safari/iPhone no la bloquee. */
+    var checkoutTab = null;
+    try{
+      checkoutTab = window.open('about:blank','_blank');
+    }catch(e){}
 
     try{
-      if(typeof window.fbq === 'function'){
-        window.fbq('track','InitiateCheckout',{
-          content_name:'Metodo Reinicio 14',
-          content_type:'product',
-          value:249.00,
-          currency:'MXN'
-        });
-      }
-    }catch(err){}
+      sendSignals(link);
+    }catch(e){}
 
-    /* Conserva el destino exacto del botón; sólo retrasa la salida para que Meta alcance a enviar. */
+    /* Damos tiempo real al pixel para enviar antes de cargar Hotmart. */
     setTimeout(function(){
-      window.location.href = href;
-    }, 900);
+      try{
+        if(checkoutTab && !checkoutTab.closed){
+          checkoutTab.location.href = href;
+        }else{
+          window.location.href = href;
+        }
+      }catch(e){
+        window.location.href = href;
+      }
+      lock = false;
+    }, 1200);
   }, true);
 })();
 </script>
