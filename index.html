@@ -2696,5 +2696,29 @@ document.addEventListener('DOMContentLoaded', function(){
 })();
 </script>
 
+
+<!-- Tracking final de intención real de checkout -->
+<script id="reinicio14-checkout-tracking">
+(function(){
+  document.addEventListener('click', function(e){
+    var a=e.target.closest && e.target.closest('a[href]');
+    if(!a) return;
+    var href=a.getAttribute('href')||'';
+    if(href.indexOf('https://pay.hotmart.com/L106914038U')===0){
+      try{
+        if(typeof fbq==='function'){
+          fbq('track','InitiateCheckout',{
+            content_name:'Metodo Reinicio 14',
+            content_type:'product',
+            value:249.00,
+            currency:'MXN'
+          });
+        }
+      }catch(err){}
+    }
+  }, true);
+})();
+</script>
+
 </body>
 </html>
