@@ -4387,6 +4387,635 @@ details p{color:var(--muted);line-height:1.6;margin-top:12px}
     opacity:1 !important;
   }
 }
+</style><style id="v9-black-red-experimental-colors-only">
+/* VARIANTE VISUAL: SOLO COLOR. Sin tocar geometría, JS, tamaños ni distribución. */
+:root{
+  --bg:#111111 !important;
+  --ink:#f5f1e9 !important;
+  --muted:#b8b3aa !important;
+  --green:#9e1f2f !important;
+  --green2:#741722 !important;
+  --orange:#d63a3a !important;
+  --soft:#191919 !important;
+  --line:rgba(255,255,255,.12) !important;
+}
+
+html,
+body{
+  background:#111111 !important;
+  color:#f5f1e9 !important;
+}
+
+.hero{
+  background:
+    radial-gradient(circle at 85% 15%,rgba(190,35,48,.24),transparent 32%),
+    linear-gradient(145deg,#0c0c0c,#1b1b1b) !important;
+}
+
+.section.white,
+.section.soft,
+.final,
+.footer{
+  background:#111111 !important;
+  color:#f5f1e9 !important;
+}
+
+.card,
+.price-card,
+.method-box,
+.objection,
+.day,
+details,
+.author-card-v2,
+.hero-photo-card,
+.sales-quiz-bridge__inner,
+.v4-deliverable-card,
+.v7-product-card{
+  background:#191919 !important;
+  border-color:rgba(255,255,255,.12) !important;
+  color:#f5f1e9 !important;
+}
+
+h1,h2,h3,strong,
+.sales-quiz-bridge h2{
+  color:#f8f4ec !important;
+}
+
+p,small,
+.muted,
+.sales-quiz-bridge p{
+  color:#bbb5ab !important;
+}
+
+/* CTA rojo profundo con relieve, sin tocar dimensiones */
+.btn,
+.sales-quiz-bridge__btn,
+.js-buy,
+#mobile-step1-v19,
+#mobile-step2-v19{
+  background:linear-gradient(180deg,#c62e3d,#861b28) !important;
+  border-color:#e34a56 !important;
+  color:#fffaf2 !important;
+  box-shadow:
+    0 4px 0 #5c111a,
+    0 9px 18px rgba(0,0,0,.28),
+    inset 0 1px 0 rgba(255,255,255,.22) !important;
+}
+
+/* Mapa: blanco cálido/negro para diferenciarlo del CTA principal */
+#savedResultFab{
+  background:linear-gradient(180deg,#f3eee4,#d9d1c3) !important;
+  border-color:#ffffff !important;
+  color:#171717 !important;
+  box-shadow:
+    0 4px 0 #aaa196,
+    0 8px 16px rgba(0,0,0,.25),
+    inset 0 1px 0 rgba(255,255,255,.8) !important;
+}
+
+/* Precio y acentos con punch */
+#precio-intro-v24,
+.price,
+.price-now,
+.v12-deliverables-price-box strong{
+  color:#ef4653 !important;
+  text-shadow:0 0 16px rgba(239,70,83,.20) !important;
+}
+
+.kicker,
+.sales-quiz-bridge__eyebrow,
+.map-state-eyebrow{
+  color:#e54a55 !important;
+}
+
+/* Indicadores cálidos: conservar la lógica, llevarlos a rojo cálido */
+#hero-swipe-dots .active,
+#v4-deliverable-dots .active,
+#v7-products-dots .active,
+#hero-swipe-dots [aria-current="true"],
+#v4-deliverable-dots [aria-current="true"],
+#v7-products-dots [aria-current="true"]{
+  background:#e24a4f !important;
+  box-shadow:0 0 12px rgba(226,74,79,.72) !important;
+}
+
+/* Bordes/separadores */
+hr,
+.offer-row,
+.pricing-row{
+  border-color:rgba(255,255,255,.12) !important;
+}
+
+/* Safe area: evitar volver a blanco */
+@media(max-width:700px){
+  html{
+    background:#0c0c0c !important;
+  }
+  body::before{
+    background:#0c0c0c !important;
+  }
+}
+</style><style id="black-red-marfil-map-contrast-only">
+
+/* Fondos residuales que heredaban verdes -> marfil cálido */
+.section.white,
+.section.soft,
+.sales-quiz-bridge,
+.mobile-v4-compact,
+.v7-visual-products{
+  background:#f1eadf !important;
+}
+
+/* En zonas marfil, recuperar tinta oscura para legibilidad */
+.section.white,
+.section.soft,
+.sales-quiz-bridge,
+.mobile-v4-compact,
+.v7-visual-products{
+  color:#171717 !important;
+}
+
+.section.white h1,.section.white h2,.section.white h3,
+.section.soft h1,.section.soft h2,.section.soft h3,
+.mobile-v4-compact h1,.mobile-v4-compact h2,.mobile-v4-compact h3,
+.v7-visual-products h1,.v7-visual-products h2,.v7-visual-products h3{
+  color:#171717 !important;
+}
+
+/* Las tarjetas internas permanecen carbón como en la variante aprobada */
+.section.white .card,
+.section.soft .card,
+.sales-quiz-bridge .sales-quiz-bridge__inner,
+.mobile-v4-compact .v4-deliverable-card,
+.v7-visual-products .v7-product-card{
+  background:#191919 !important;
+  color:#f5f1e9 !important;
+}
+
+/* VER MI MAPA: marfil + texto negro de alto contraste */
+#savedResultFab{
+  background:linear-gradient(180deg,#fffaf0,#e7ddcf) !important;
+  border:1px solid #ffffff !important;
+  color:#111111 !important;
+  text-shadow:none !important;
+}
+
+#savedResultFab *,
+#savedResultFab .saved-result-fab__label{
+  color:#111111 !important;
+  text-shadow:none !important;
+  font-weight:950 !important;
+}
+
+/* También los botones VER MI MAPA dentro de las secciones */
+#quiz-bridge-mid .sales-quiz-bridge__btn[href*="mapa"],
+#quiz-bridge-final .sales-quiz-bridge__btn[href*="mapa"]{
+  background:linear-gradient(180deg,#fffaf0,#e7ddcf) !important;
+  color:#111111 !important;
+  border-color:#ffffff !important;
+  text-shadow:none !important;
+  box-shadow:
+    0 4px 0 #aaa196,
+    0 8px 16px rgba(0,0,0,.24),
+    inset 0 1px 0 rgba(255,255,255,.85) !important;
+}
+
+#quiz-bridge-mid .sales-quiz-bridge__btn[href*="mapa"] *,
+#quiz-bridge-final .sales-quiz-bridge__btn[href*="mapa"] *{
+  color:#111111 !important;
+}
+
+</style><style id="black-red-marfil-glass-final-only">
+
+/* 1) ZONA DE FOTO + CARRUSELES: eliminar verdes residuales */
+.hero-photo-card,
+.hero-swipe-photo,
+.hero-swipe-message,
+.v4-deliverable-image,
+.v7-product-image,
+.mobile-v4-compact,
+.v7-visual-products,
+.hero-swipe-track,
+.v4-deliverables-track,
+.v7-products-track{
+  background:#f1eadf !important;
+}
+
+/* La foto sigue protagonista sin tocar dimensiones */
+.hero-swipe-photo img,
+.v7-product-card:first-child .v7-product-image img{
+  background:#f1eadf !important;
+}
+
+/* 2) Botón "DESLIZA LOS ENTREGABLES" deja de ser verde */
+.v4-swipe-cue,
+.v5-swipe-cue,
+.inner-swipe-label{
+  background:linear-gradient(180deg,#2a2a2a,#151515) !important;
+  color:#fff7ed !important;
+  border:1px solid rgba(255,255,255,.14) !important;
+  box-shadow:
+    0 5px 0 #090909,
+    0 10px 18px rgba(0,0,0,.22),
+    inset 0 1px 0 rgba(255,255,255,.12) !important;
+}
+
+/* 3) BOTONES DE COMPRA: rojo más intenso con look de vidrio ahumado */
+.btn,
+.js-buy,
+#mobile-step1-v19,
+#mobile-step2-v19,
+.sales-quiz-bridge__btn:not([href*="mapa"]){
+  background:
+    linear-gradient(180deg,rgba(255,77,88,.98) 0%,rgba(206,35,48,.98) 48%,rgba(132,20,31,.98) 100%) !important;
+  border:1px solid rgba(255,180,185,.42) !important;
+  color:#fffaf4 !important;
+  box-shadow:
+    0 5px 0 #651018,
+    0 12px 24px rgba(96,12,21,.34),
+    inset 0 2px 0 rgba(255,255,255,.28),
+    inset 0 -10px 20px rgba(71,7,13,.16) !important;
+  backdrop-filter:blur(8px) saturate(125%) !important;
+  -webkit-backdrop-filter:blur(8px) saturate(125%) !important;
+  text-shadow:
+    0 1px 0 rgba(0,0,0,.45),
+    0 0 8px rgba(255,214,214,.24) !important;
+}
+
+/* pequeño brillo tipo vidrio */
+.btn::before,
+.js-buy::before,
+#mobile-step1-v19::before,
+#mobile-step2-v19::before{
+  content:"";
+  position:absolute;
+  left:8%;
+  right:8%;
+  top:5px;
+  height:34%;
+  border-radius:999px;
+  background:linear-gradient(180deg,rgba(255,255,255,.20),rgba(255,255,255,0));
+  pointer-events:none;
+}
+
+/* 4) Botón Hotmart: mantener naranja, pero armonizarlo con negro/marfil/rojo */
+.v8-cta-only .hotmart-warm-light-cta{
+  background:
+    linear-gradient(180deg,#d96f45 0%,#b94f35 48%,#7e2c23 100%) !important;
+  border:1px solid rgba(255,219,189,.38) !important;
+  border-bottom:4px solid #5f211a !important;
+  color:#fff0d9 !important;
+  box-shadow:
+    0 7px 0 #5f211a,
+    0 13px 22px rgba(79,25,18,.28),
+    inset 0 2px 0 rgba(255,240,220,.20),
+    inset 0 -3px 0 rgba(83,24,17,.22) !important;
+}
+
+.v8-cta-only .hotmart-warm-light-cta,
+.v8-cta-only .hotmart-warm-light-cta *{
+  color:#fff0d9 !important;
+  text-shadow:
+    0 1px 0 rgba(255,255,255,.18),
+    0 2px 0 rgba(87,31,22,.62),
+    0 0 8px rgba(255,205,160,.24) !important;
+}
+
+/* 5) Evitar verdes residuales en acentos internos de tarjetas */
+.v4-deliverable-card,
+.v7-product-card,
+.mobile-v4-compact .card,
+.v7-visual-products .card{
+  border-color:rgba(0,0,0,.12) !important;
+}
+
+</style><style id="black-red-marfil-contrast-fine-tune">
+/* Texto oscuro únicamente cuando vive directamente sobre superficies marfil */
+.section.white > .wrap,
+.section.soft > .wrap,
+.mobile-v4-compact > .wrap,
+.v7-visual-products > .wrap{
+  color:#211d1a !important;
+}
+
+.section.white > .wrap > p,
+.section.soft > .wrap > p,
+.mobile-v4-compact > .wrap > p,
+.v7-visual-products > .wrap > p,
+.section.white .v4-section-head p,
+.section.soft .v4-section-head p,
+.mobile-v4-compact .v4-section-head p,
+.v7-visual-products .center > p{
+  color:#514943 !important;
+}
+
+/* Títulos y etiquetas que quedan sobre marfil */
+.section.white > .wrap > h2,
+.section.white > .wrap > h3,
+.section.soft > .wrap > h2,
+.section.soft > .wrap > h3,
+.mobile-v4-compact .v4-section-head h2,
+.mobile-v4-compact .v4-section-head h3,
+.v7-visual-products .center > h2,
+.v7-visual-products .center > h3{
+  color:#171412 !important;
+}
+
+/* Indicaciones de deslizar / textos auxiliares sobre fondo claro */
+.mobile-v4-compact .v4-section-head,
+.v7-visual-products .center,
+.mobile-v4-compact .v4-section-head *,
+.v7-visual-products .center *{
+  text-shadow:none;
+}
+
+/* Las tarjetas oscuras conservan texto claro: evita que las reglas de marfil
+   contaminen contenido dentro de carbón. */
+.card,
+.price-card,
+.method-box,
+.objection,
+.day,
+details,
+.author-card-v2,
+.hero-photo-card,
+.sales-quiz-bridge__inner,
+.v4-deliverable-card,
+.v7-product-card{
+  color:#f5f1e9 !important;
+}
+
+.card p,.card small,
+.price-card p,.price-card small,
+.method-box p,.method-box small,
+.objection p,.objection small,
+.day p,.day small,
+details p,details small,
+.author-card-v2 p,.author-card-v2 small,
+.hero-photo-card p,.hero-photo-card small,
+.sales-quiz-bridge__inner p,.sales-quiz-bridge__inner small,
+.v4-deliverable-card p,.v4-deliverable-card small,
+.v7-product-card p,.v7-product-card small{
+  color:#c8c1b7 !important;
+}
+
+.card h2,.card h3,.card strong,
+.price-card h2,.price-card h3,.price-card strong,
+.method-box h2,.method-box h3,.method-box strong,
+.objection h2,.objection h3,.objection strong,
+.day h2,.day h3,.day strong,
+details h2,details h3,details strong,
+.author-card-v2 h2,.author-card-v2 h3,.author-card-v2 strong,
+.hero-photo-card h2,.hero-photo-card h3,.hero-photo-card strong,
+.sales-quiz-bridge__inner h2,.sales-quiz-bridge__inner h3,.sales-quiz-bridge__inner strong,
+.v4-deliverable-card h2,.v4-deliverable-card h3,.v4-deliverable-card strong,
+.v7-product-card h2,.v7-product-card h3,.v7-product-card strong{
+  color:#fffaf2 !important;
+}
+
+/* Botón mapa mantiene el contraste negro/marfil ya aprobado */
+#savedResultFab,
+#savedResultFab *,
+#quiz-bridge-mid .sales-quiz-bridge__btn[href*="mapa"],
+#quiz-bridge-final .sales-quiz-bridge__btn[href*="mapa"]{
+  color:#111111 !important;
+}
+</style><style id="contrast-carousel-alignment-only">
+
+/* =========================================================
+   1) CONTRASTE: ZONAS CLARAS ESPECÍFICAS
+   ========================================================= */
+
+/* Carrusel de antes/después: cuando la tarjeta/fondo es marfil,
+   fuerza texto carbón. */
+.hero-swipe-photo,
+.hero-swipe-photo .hero-photo-copy,
+.hero-swipe-photo .hero-photo-copy *,
+.hero-swipe-message,
+.hero-swipe-message *{
+  color:#171412 !important;
+}
+
+/* Si alguna tarjeta del carrusel superior conserva fondo claro */
+.hero-swipe-card{
+  color:#171412 !important;
+}
+.hero-swipe-card h2,
+.hero-swipe-card h3,
+.hero-swipe-card strong{
+  color:#171412 !important;
+}
+.hero-swipe-card p,
+.hero-swipe-card span,
+.hero-swipe-card small{
+  color:#4f4740 !important;
+}
+
+/* Última tarjeta del carrusel de sistema completo:
+   fondo claro => texto oscuro */
+.v7-product-card:last-child,
+.v7-product-card:last-child .v7-product-copy,
+.v7-product-card:last-child .v7-product-copy *{
+  color:#171412 !important;
+}
+.v7-product-card:last-child .v7-product-copy p,
+.v7-product-card:last-child .v7-product-copy small{
+  color:#514943 !important;
+}
+
+/* Bloque Acceso inmediato / Hotmart: si el contenedor es claro,
+   todo el texto fuera del botón debe ser oscuro */
+.v8-cta-only,
+.v8-cta-only .v8-hotmart-delivery{
+  color:#171412 !important;
+}
+.v8-cta-only .v8-hotmart-delivery strong{
+  color:#171412 !important;
+}
+.v8-cta-only .v8-hotmart-delivery span,
+.v8-cta-only .offer-trust,
+.v8-cta-only .offer-trust *{
+  color:#514943 !important;
+}
+
+/* El botón Hotmart mantiene su look oscuro/rojizo y texto claro */
+.v8-cta-only .hotmart-warm-light-cta,
+.v8-cta-only .hotmart-warm-light-cta *{
+  color:#fff0d9 !important;
+}
+
+/* =========================================================
+   2) CENTRADO CONSISTENTE DE CARRUSELES
+   ========================================================= */
+
+/* Todos los tracks usan padding lateral simétrico */
+.hero-swipe-track,
+.v4-deliverables-track,
+.v7-products-track{
+  padding-left:14px !important;
+  padding-right:14px !important;
+  scroll-padding-left:14px !important;
+  scroll-padding-right:14px !important;
+}
+
+/* Todas las tarjetas se centran igual dentro del viewport */
+.hero-swipe-card,
+.v4-deliverable-card,
+.v7-product-card{
+  scroll-snap-align:center !important;
+  scroll-snap-stop:always !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+}
+
+/* Anchura consistente para evitar que unas queden ligeramente corridas */
+@media(max-width:700px){
+  .hero-swipe-card,
+  .v4-deliverable-card,
+  .v7-product-card{
+    flex:0 0 calc(100vw - 56px) !important;
+    width:calc(100vw - 56px) !important;
+    max-width:390px !important;
+  }
+
+  .hero-swipe-track,
+  .v4-deliverables-track,
+  .v7-products-track{
+    justify-content:flex-start !important;
+    box-sizing:border-box !important;
+  }
+}
+
+</style><style id="carousel-fine-white-panels-workbook-only">
+
+/* PRIMER CARRUSEL:
+   conservar la tarjeta 2 tal cual y llevar las siguientes zonas de texto
+   al mismo lenguaje visual blanco. */
+@media(max-width:700px){
+  .hero-swipe-card:nth-child(3) .hero-swipe-message,
+  .hero-swipe-card:nth-child(3) .hero-photo-copy,
+  .hero-swipe-card:nth-child(4) .hero-swipe-message,
+  .hero-swipe-card:nth-child(4) .hero-photo-copy{
+    background:#fff !important;
+    color:#171412 !important;
+  }
+
+  .hero-swipe-card:nth-child(3) .hero-swipe-message *,
+  .hero-swipe-card:nth-child(3) .hero-photo-copy *,
+  .hero-swipe-card:nth-child(4) .hero-swipe-message *,
+  .hero-swipe-card:nth-child(4) .hero-photo-copy *{
+    color:#171412 !important;
+  }
+
+  /* ÚLTIMO CARRUSEL — WORKBOOK:
+     texto igual al resto de tarjetas oscuras + precio rojo. */
+  .v7-product-card:last-child .v7-product-copy,
+  .v7-product-card:last-child .v7-product-copy h2,
+  .v7-product-card:last-child .v7-product-copy h3,
+  .v7-product-card:last-child .v7-product-copy p,
+  .v7-product-card:last-child .v7-product-copy span,
+  .v7-product-card:last-child .v7-product-copy small,
+  .v7-product-card:last-child .v7-product-copy strong{
+    color:#fffaf2 !important;
+  }
+
+  .v7-product-card:last-child .price,
+  .v7-product-card:last-child .price-now,
+  .v7-product-card:last-child [class*="price"],
+  .v7-product-card:last-child .v7-product-price{
+    color:#ef4653 !important;
+    text-shadow:0 0 12px rgba(239,70,83,.18) !important;
+  }
+}
+</style><style id="first-carousel-uniform-white-copy-panels">
+@media(max-width:700px){
+
+  /* Primer carrusel: desde la tarjeta de referencia en adelante,
+     todas las zonas inferiores de copy usan el mismo panel blanco. */
+  .hero-swipe-track > *:nth-child(n+2) .hero-swipe-message,
+  .hero-swipe-track > *:nth-child(n+2) .hero-photo-copy,
+  .hero-swipe-track > *:nth-child(n+2) .hero-swipe-copy,
+  .hero-swipe-track > *:nth-child(n+2) .hero-copy,
+  .hero-swipe-track > *:nth-child(n+2) .copy,
+  .hero-swipe-track > *:nth-child(n+2) .content,
+  .hero-swipe-track > *:nth-child(n+2) .text{
+    background:#ffffff !important;
+    color:#171412 !important;
+  }
+
+  .hero-swipe-track > *:nth-child(n+2) .hero-swipe-message *,
+  .hero-swipe-track > *:nth-child(n+2) .hero-photo-copy *,
+  .hero-swipe-track > *:nth-child(n+2) .hero-swipe-copy *,
+  .hero-swipe-track > *:nth-child(n+2) .hero-copy *,
+  .hero-swipe-track > *:nth-child(n+2) .copy *,
+  .hero-swipe-track > *:nth-child(n+2) .content *,
+  .hero-swipe-track > *:nth-child(n+2) .text *{
+    color:#171412 !important;
+  }
+
+  /* Respaldo para las tarjetas cuya zona de texto sea el propio bloque inferior
+     y no tenga wrapper específico: el panel blanco se pinta sólo en la parte
+     de copy mediante un pseudo-fondo, sin alterar dimensiones. */
+  .hero-swipe-track > .hero-swipe-card:nth-child(n+2){
+    --uniform-copy-bg:#ffffff;
+  }
+}
+</style><style id="first-carousel-uniform-copy-panels-v2">
+@media(max-width:700px){
+
+  /* MISMO fondo exacto para las 3 tarjetas de texto del primer carrusel */
+  .hero-swipe-track > .hero-card-v7-2,
+  .hero-swipe-track > .hero-card-v7-3,
+  .hero-swipe-track > .hero-card-v7-4{
+    background:#ffffff !important;
+    color:#171412 !important;
+  }
+
+  /* MISMO color exacto para todos los textos */
+  .hero-swipe-track > .hero-card-v7-2 *,
+  .hero-swipe-track > .hero-card-v7-3 *,
+  .hero-swipe-track > .hero-card-v7-4 *{
+    color:#171412 !important;
+    text-shadow:none !important;
+  }
+
+  /* Los pequeños bloques/listados internos también iguales en blanco */
+  .hero-swipe-track > .hero-card-v7-2 .hero-swipe-points b,
+  .hero-swipe-track > .hero-card-v7-3 .hero-swipe-points b,
+  .hero-swipe-track > .hero-card-v7-4 .hero-swipe-points b{
+    background:#ffffff !important;
+    color:#171412 !important;
+    border:1px solid rgba(23,20,18,.12) !important;
+    box-shadow:0 5px 12px rgba(0,0,0,.06) !important;
+  }
+}
+</style><style id="first-carousel-ivory-cards-white-copy-only">
+@media(max-width:700px){
+
+  /* Tarjetas 2, 3 y 4: fondo general marfil */
+  .hero-swipe-track > .hero-card-v7-2,
+  .hero-swipe-track > .hero-card-v7-3,
+  .hero-swipe-track > .hero-card-v7-4{
+    background:#f1eadf !important;
+    color:#171412 !important;
+  }
+
+  /* La zona/listado donde va el texto: blanco + letras negras */
+  .hero-swipe-track > .hero-card-v7-2 .hero-swipe-points b,
+  .hero-swipe-track > .hero-card-v7-3 .hero-swipe-points b,
+  .hero-swipe-track > .hero-card-v7-4 .hero-swipe-points b{
+    background:#ffffff !important;
+    color:#171412 !important;
+    border:1px solid rgba(23,20,18,.10) !important;
+    box-shadow:0 5px 12px rgba(0,0,0,.06) !important;
+  }
+
+  .hero-swipe-track > .hero-card-v7-2 .hero-swipe-points b *,
+  .hero-swipe-track > .hero-card-v7-3 .hero-swipe-points b *,
+  .hero-swipe-track > .hero-card-v7-4 .hero-swipe-points b *{
+    color:#171412 !important;
+  }
+}
 </style></head>
 <body>
 <header class="hero">
