@@ -4211,12 +4211,6 @@ details p{color:var(--muted);line-height:1.6;margin-top:12px}
     pointer-events:none;
   }
 
-  /* 2) Si YA existe un resultado guardado, no mostrar otra vez
-        "Descubre mi perfil gratis" arriba. */
-  body:has(#savedResultFab.is-visible) #quiz-bridge-mid{
-    display:none !important;
-  }
-
   /* 3) Acercar cada carrusel a sus luces para que visualmente sean una sola pieza. */
   .hero-swipe-track,
   .v4-deliverables-track,
@@ -4231,12 +4225,7 @@ details p{color:var(--muted);line-height:1.6;margin-top:12px}
     margin-bottom:11px !important;
   }
 
-  /* Cuando el bloque superior desaparece porque ya tienes mapa,
-     evitar dejar un hueco raro antes del hero. */
-  body:has(#savedResultFab.is-visible) .hero{
-    padding-top:calc(4px + env(safe-area-inset-top,0px)) !important;
   }
-}
 </style><style id="v3-upper-align-gap-only">
 @media(max-width:700px){
 
@@ -4387,6 +4376,15 @@ details p{color:var(--muted);line-height:1.6;margin-top:12px}
     left:12px !important;
     right:calc(20% + 10px) !important;
     width:auto !important;
+  }
+}
+</style><style id="v9-top-bridge-visibility-fix">
+@media(max-width:700px){
+  #quiz-bridge-mid,
+  #quiz-bridge-final{
+    display:block !important;
+    visibility:visible !important;
+    opacity:1 !important;
   }
 }
 </style></head>
