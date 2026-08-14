@@ -3891,107 +3891,382 @@ details p{color:var(--muted);line-height:1.6;margin-top:12px}
       0 0 9px rgba(255,213,143,.72) !important;
   }
 }
-</style><style id="fab-80-20-only-fix">
+</style><style id="fab-80-20-visible-final">
 @media(max-width:700px){
 
-  /*
-   * UN SOLO RENGLÓN FLOTANTE.
-   * El contenedor principal ocupa todo el ancho útil.
-   */
-  #conversion-fab-v8{
-    position:fixed !important;
-    left:10px !important;
-    right:10px !important;
-    bottom:calc(9px + env(safe-area-inset-bottom)) !important;
-    width:auto !important;
-    max-width:none !important;
-    margin:0 !important;
-    padding:0 !important;
-
-    display:grid !important;
-    grid-template-columns:minmax(0,4fr) minmax(72px,1fr) !important;
-    grid-template-rows:54px !important;
-    column-gap:7px !important;
-    align-items:stretch !important;
-
-    background:transparent !important;
-    border:0 !important;
-    box-shadow:none !important;
-    z-index:9999 !important;
-  }
-
-  /* Ambos hijos directos obligatoriamente en la MISMA fila. */
-  #conversion-fab-v8 > *{
-    position:relative !important;
-    inset:auto !important;
-    width:100% !important;
-    min-width:0 !important;
-    max-width:none !important;
-    height:54px !important;
-    min-height:54px !important;
-    max-height:54px !important;
-    margin:0 !important;
-    align-self:stretch !important;
-  }
-
-  #conversion-fab-v8 > *:first-child{
-    grid-column:1 !important;
-    grid-row:1 !important;
-  }
-
-  #conversion-fab-v8 > *:nth-child(2){
-    grid-column:2 !important;
-    grid-row:1 !important;
-  }
-
-  /* Botón principal: conservar su look, sólo adaptar geometría. */
-  #conversion-fab-v8 .fab-main{
-    width:100% !important;
-    height:54px !important;
-    margin:0 !important;
-    border-radius:16px !important;
-  }
-
-  /*
-   * Si el botón de mapa es un flotante independiente del DOM,
-   * lo alineamos a la derecha del principal en vez de dejarlo abajo.
-   */
+  /* El CTA móvil que esté activo ocupa ~80% del ancho útil. */
   #mobile-step1-v19,
   #mobile-step2-v19{
-    bottom:calc(9px + env(safe-area-inset-bottom)) !important;
-  }
-
-  /* El CTA principal de la barra móvil ocupa ~80%. */
-  #mobile-step2-v19{
-    left:10px !important;
-    right:calc(20% + 13px) !important;
+    left:12px !important;
+    right:calc(20% + 10px) !important;
     width:auto !important;
     max-width:none !important;
-    height:54px !important;
+    bottom:calc(18px + env(safe-area-inset-bottom)) !important;
+    min-height:58px !important;
+    height:58px !important;
+    margin:0 !important;
+    padding:8px 12px !important;
+    border-radius:16px !important;
+    z-index:2147483645 !important;
   }
 
-  /* El mapa ocupa ~20% y queda en la MISMA línea. */
-  #mobile-step1-v19{
+  #mobile-step1-v19 .m19-main,
+  #mobile-step2-v19 .m19-main{
+    font-size:.82rem !important;
+    line-height:1.08 !important;
+    white-space:normal !important;
+  }
+
+  /* El botón REAL del mapa ocupa ~20% y SIEMPRE queda visible en móvil. */
+  #savedResultFab.saved-result-fab{
+    display:flex !important;
+    position:fixed !important;
     left:auto !important;
-    right:10px !important;
-    width:calc(20% - 10px) !important;
-    max-width:none !important;
-    height:54px !important;
-    min-height:54px !important;
+    right:12px !important;
+    bottom:calc(18px + env(safe-area-inset-bottom)) !important;
+
+    width:calc(20% - 5px) !important;
+    min-width:68px !important;
+    max-width:92px !important;
+    min-height:58px !important;
+    height:58px !important;
+
     margin:0 !important;
+    padding:5px 6px !important;
+    border-radius:16px !important;
+
+    align-items:center !important;
+    justify-content:center !important;
+    gap:0 !important;
+
+    z-index:2147483646 !important;
   }
 
-  #mobile-step1-v19 > *,
-  #mobile-step2-v19 > *{
-    height:54px !important;
-    min-height:54px !important;
-    margin:0 !important;
-  }
-
-  /* Si ambos sistemas existen simultáneamente, mostrar sólo el sistema
-     móvil v19 para evitar el duplicado visual. */
-  body:has(#mobile-step1-v19):has(#mobile-step2-v19) #conversion-fab-v8{
+  #savedResultFab .saved-result-fab__orb{
     display:none !important;
+  }
+
+  #savedResultFab .saved-result-fab__label{
+    display:block !important;
+    width:100% !important;
+    margin:0 !important;
+    padding:0 !important;
+    text-align:center !important;
+    white-space:normal !important;
+    font-size:.60rem !important;
+    line-height:1.08 !important;
+    font-weight:950 !important;
+    letter-spacing:.02em !important;
+  }
+
+  /* El sistema viejo ya estaba oculto en móvil; lo reafirmamos para evitar duplicados. */
+  #conversion-fab-v8{
+    display:none !important;
+  }
+
+  body{
+    padding-bottom:92px !important;
+  }
+}
+</style><style id="mobile-breathing-fine-tune-only">
+@media(max-width:700px){
+
+  /* 1) Recuadro superior del quiz: menos apretado, sin hacerlo enorme */
+  #quiz-bridge-mid.sales-quiz-bridge{
+    margin-top:9px !important;
+    margin-bottom:10px !important;
+    padding:5px 0 !important;
+  }
+
+  #quiz-bridge-mid .sales-quiz-bridge__inner{
+    padding:15px 14px !important;
+    border-radius:18px !important;
+  }
+
+  #quiz-bridge-mid .sales-quiz-bridge__eyebrow{
+    margin-bottom:5px !important;
+    line-height:1.2 !important;
+  }
+
+  #quiz-bridge-mid h2{
+    margin:0 0 6px !important;
+    line-height:1.08 !important;
+  }
+
+  #quiz-bridge-mid p{
+    margin:0 auto 10px !important;
+    line-height:1.4 !important;
+  }
+
+  #quiz-bridge-mid .sales-quiz-bridge__btn{
+    margin-top:2px !important;
+    margin-bottom:7px !important;
+  }
+
+  #quiz-bridge-mid small{
+    display:block !important;
+    margin-top:5px !important;
+    line-height:1.3 !important;
+  }
+
+  /* 2) Tu foto del hero: un poco más protagonista */
+  .hero-swipe-photo img{
+    height:238px !important;
+    object-fit:contain !important;
+    object-position:center !important;
+  }
+
+  .hero-swipe-photo{
+    min-height:238px !important;
+  }
+
+  /* Copy bajo la foto: más discreto para no competir con la imagen */
+  .hero-photo-copy{
+    padding:12px 14px !important;
+  }
+
+  .hero-photo-copy strong{
+    font-size:1.42rem !important;
+    line-height:1 !important;
+    margin:0 0 3px !important;
+  }
+
+  .hero-photo-copy span{
+    font-size:.76rem !important;
+    line-height:1.35 !important;
+  }
+
+  /* 3) Después de las señales luminosas: un poco de respiración */
+  #hero-swipe-dots{
+    margin-bottom:17px !important;
+  }
+
+  .hero-grid > div:first-child > .kicker{
+    margin-top:5px !important;
+    margin-bottom:7px !important;
+  }
+
+  .hero-grid > div:first-child > h1{
+    margin-top:3px !important;
+    margin-bottom:8px !important;
+  }
+
+  /* No tocamos entregables ni nada de aquí hacia abajo. */
+}
+</style><style id="mobile-upper-flow-balance-only">
+@media(max-width:700px){
+
+  /* Más respiración general en la zona superior */
+  .hero{
+    padding-bottom:24px !important;
+  }
+
+  /* Bloque "Descubre mi perfil" un poco más amplio */
+  #quiz-bridge-mid.sales-quiz-bridge{
+    margin-top:12px !important;
+    margin-bottom:14px !important;
+    padding:7px 0 !important;
+  }
+
+  #quiz-bridge-mid .sales-quiz-bridge__inner{
+    padding:18px 16px !important;
+    border-radius:20px !important;
+  }
+
+  #quiz-bridge-mid h2{
+    margin-bottom:8px !important;
+  }
+
+  #quiz-bridge-mid p{
+    margin-bottom:12px !important;
+    line-height:1.46 !important;
+  }
+
+  /* Foto un poco más protagonista, sin recortar */
+  .hero-swipe-photo{
+    min-height:252px !important;
+  }
+
+  .hero-swipe-photo img{
+    height:252px !important;
+    object-fit:contain !important;
+    object-position:center !important;
+  }
+
+  /* Más aire en el copy bajo la foto */
+  .hero-photo-copy{
+    padding:15px 16px !important;
+  }
+
+  .hero-photo-copy strong{
+    margin-bottom:5px !important;
+  }
+
+  /* Más separación entre carrusel, luces y el arranque del método */
+  #hero-swipe-dots{
+    margin-top:13px !important;
+    margin-bottom:22px !important;
+  }
+
+  .hero-grid > div:first-child > .kicker{
+    margin-top:8px !important;
+    margin-bottom:9px !important;
+  }
+
+  .hero-grid > div:first-child > h1{
+    margin-bottom:10px !important;
+  }
+
+  /* No tocar nada desde entregables hacia abajo */
+}
+</style><style id="mobile-final-overflow-safearea-only">
+@media(max-width:700px){
+
+  /* Fondo continuo también en la zona segura superior del teléfono */
+  html{
+    background:#21372a !important;
+    overflow-x:hidden !important;
+    width:100% !important;
+  }
+
+  body{
+    overflow-x:hidden !important;
+    width:100% !important;
+    max-width:100% !important;
+    background:var(--bg) !important;
+    overscroll-behavior-x:none !important;
+  }
+
+  /* El hero cubre también cualquier pequeño hueco superior */
+  .hero{
+    background:
+      radial-gradient(circle at 85% 15%,rgba(217,107,67,.25),transparent 32%),
+      linear-gradient(145deg,#21372a,#415a45) !important;
+    margin-top:-1px !important;
+    padding-top:calc(2px + env(safe-area-inset-top,0px)) !important;
+  }
+
+  /* Bloques fijos: jamás deben ensanchar el viewport */
+  .wrap,
+  .section,
+  .hero,
+  .final,
+  .footer,
+  .sales-quiz-bridge,
+  .price-card,
+  .method-box,
+  .faq,
+  .mobile-v4-compact,
+  .v7-visual-products{
+    max-width:100% !important;
+    overflow-x:clip !important;
+  }
+
+  /* Los únicos lugares autorizados a desplazarse horizontalmente */
+  .hero-swipe-track,
+  .v4-deliverables-track,
+  .v7-products-track{
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
+    overscroll-behavior-x:contain !important;
+    touch-action:pan-x pan-y !important;
+    -webkit-overflow-scrolling:touch !important;
+  }
+
+  /* Evitar que márgenes/transformaciones de hijos generen "arrastre" lateral */
+  img,
+  .card,
+  .day,
+  .objection,
+  .offer-row,
+  .pricing-row,
+  details,
+  .author-card-v2,
+  .story-photo,
+  .hero-photo-card{
+    max-width:100% !important;
+  }
+
+  /* No permitir que los botones flotantes expandan el ancho visual */
+  #mobile-step1-v19,
+  #mobile-step2-v19,
+  #savedResultFab{
+    box-sizing:border-box !important;
+  }
+}
+</style><style id="mobile-final-map-dots-safearea">
+@media(max-width:700px){
+
+  /* 1) Franja superior: cubrir físicamente la safe-area con el mismo fondo del hero. */
+  body::before{
+    content:"";
+    position:fixed;
+    left:0;
+    right:0;
+    top:0;
+    height:max(6px, env(safe-area-inset-top, 0px));
+    background:
+      linear-gradient(145deg,#21372a,#415a45) !important;
+    z-index:2147483000;
+    pointer-events:none;
+  }
+
+  /* 2) Si YA existe un resultado guardado, no mostrar otra vez
+        "Descubre mi perfil gratis" arriba. */
+  body:has(#savedResultFab.is-visible) #quiz-bridge-mid{
+    display:none !important;
+  }
+
+  /* 3) Acercar cada carrusel a sus luces para que visualmente sean una sola pieza. */
+  .hero-swipe-track,
+  .v4-deliverables-track,
+  .v7-products-track{
+    padding-bottom:8px !important;
+  }
+
+  #hero-swipe-dots,
+  #v4-deliverable-dots,
+  #v7-products-dots{
+    margin-top:2px !important;
+    margin-bottom:11px !important;
+  }
+
+  /* Cuando el bloque superior desaparece porque ya tienes mapa,
+     evitar dejar un hueco raro antes del hero. */
+  body:has(#savedResultFab.is-visible) .hero{
+    padding-top:calc(4px + env(safe-area-inset-top,0px)) !important;
+  }
+}
+</style><style id="reinicio-test-map-state-final-css">
+@media(max-width:700px){
+
+  /* La sección superior SIEMPRE conserva su lugar: cambia el contenido, no el layout. */
+  #quiz-bridge-mid{
+    display:block !important;
+  }
+
+  /* SIN TEST: CTA Reinicio usa todo el ancho y no existe hueco de mapa. */
+  body.needs-quiz #mobile-step1-v19,
+  body.needs-quiz #mobile-step2-v19{
+    left:12px !important;
+    right:12px !important;
+    width:auto !important;
+  }
+  body.needs-quiz #savedResultFab{
+    display:none !important;
+  }
+
+  /* CON TEST: misma barra 80/20 que ya aprobamos. */
+  body.has-saved-map #mobile-step1-v19,
+  body.has-saved-map #mobile-step2-v19{
+    left:12px !important;
+    right:calc(20% + 10px) !important;
+    width:auto !important;
+  }
+  body.has-saved-map #savedResultFab{
+    display:flex !important;
+    right:12px !important;
+    width:calc(20% - 5px) !important;
   }
 }
 </style></head>
@@ -4940,7 +5215,7 @@ document.addEventListener('DOMContentLoaded', function(){
 </script>
 <a aria-label="Volver a mi resultado" class="saved-result-fab sales-to-quiz" href="https://alberto619.github.io/quiz-reinicio/" id="savedResultFab">
 <span class="saved-result-fab__orb">↺</span>
-<span class="saved-result-fab__label">VER MI RESULTADO<br/>Recibir mi mapa</span>
+<span class="saved-result-fab__label">VER MI MAPA</span>
 </a>
 <script id="sales-quiz-smart-v2-logic">
 (function(){
@@ -5120,5 +5395,104 @@ document.addEventListener('DOMContentLoaded', function(){
   }
 })();
 </script>
-</body>
+<script id="reinicio-test-map-state-final">
+(function(){
+  var KEY = 'reinicio14_quiz_result_v9';
+
+  function readResult(){
+    try{
+      var raw = localStorage.getItem(KEY);
+      if(!raw) return null;
+      var data = JSON.parse(raw);
+      return data || null;
+    }catch(e){
+      return null;
+    }
+  }
+
+  function pick(obj, keys){
+    if(!obj || typeof obj !== 'object') return '';
+    for(var i=0;i<keys.length;i++){
+      var v = obj[keys[i]];
+      if(typeof v === 'string' && v.trim()) return v.trim();
+    }
+    return '';
+  }
+
+  function apply(){
+    var bridge = document.getElementById('quiz-bridge-mid');
+    var mapFab = document.getElementById('savedResultFab');
+    var step1 = document.getElementById('mobile-step1-v19');
+    var step2 = document.getElementById('mobile-step2-v19');
+    var result = readResult();
+    var hasResult = !!result;
+
+    document.body.classList.toggle('has-saved-map', hasResult);
+    document.body.classList.toggle('needs-quiz', !hasResult);
+
+    if(bridge){
+      bridge.style.display = 'block';
+
+      var eyebrow = bridge.querySelector('.sales-quiz-bridge__eyebrow');
+      var title = bridge.querySelector('h2');
+      var desc = bridge.querySelector('p');
+      var btn = bridge.querySelector('.sales-quiz-bridge__btn');
+      var note = bridge.querySelector('small');
+
+      if(hasResult){
+        var profile = pick(result, ['profileName','profile','perfil','name','title','resultName','archetype']);
+        var summary = pick(result, ['summary','resumen','description','descripcion','message','mensaje','focus','enfoque']);
+
+        if(eyebrow) eyebrow.textContent = 'TU MAPA YA ESTÁ LISTO';
+        if(title) title.textContent = profile ? ('Tu perfil: ' + profile) : 'Ya identificaste tu punto de partida';
+        if(desc) desc.textContent = summary || 'Ya tienes tu mapa. Úsalo para recordar qué te está frenando y cuál es el siguiente paso que necesitas trabajar.';
+        if(btn){
+          btn.textContent = 'VER MI MAPA';
+          btn.setAttribute('href', '#');
+          btn.onclick = function(ev){
+            ev.preventDefault();
+            if(mapFab) mapFab.click();
+          };
+        }
+        if(note) note.textContent = 'Tu resultado queda guardado para que puedas volver cuando lo necesites.';
+      }else{
+        if(eyebrow) eyebrow.textContent = 'DESCUBRE TU PERFIL GRATIS';
+        if(title) title.textContent = 'Identifica qué te está frenando';
+        if(desc) desc.textContent = 'Responde unas preguntas rápidas y descubre por dónde empezar sin intentar cambiar todo de golpe.';
+        if(btn) btn.onclick = null;
+      }
+    }
+
+    if(mapFab){
+      if(hasResult){
+        mapFab.classList.add('is-visible');
+        mapFab.style.display = 'flex';
+      }else{
+        mapFab.classList.remove('is-visible');
+        mapFab.style.display = 'none';
+      }
+    }
+
+    /* No quitamos ni recreamos botones. Sólo cambiamos la geometría por estado. */
+    [step1, step2].forEach(function(el){
+      if(!el) return;
+      if(hasResult){
+        el.style.left = '12px';
+        el.style.right = 'calc(20% + 10px)';
+      }else{
+        el.style.left = '12px';
+        el.style.right = '12px';
+      }
+    });
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', apply);
+  }else{
+    apply();
+  }
+  window.addEventListener('pageshow', apply);
+  window.addEventListener('storage', apply);
+})();
+</script></body>
 </html>
