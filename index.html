@@ -4237,36 +4237,156 @@ details p{color:var(--muted);line-height:1.6;margin-top:12px}
     padding-top:calc(4px + env(safe-area-inset-top,0px)) !important;
   }
 }
-</style><style id="reinicio-test-map-state-final-css">
+</style><style id="v3-upper-align-gap-only">
 @media(max-width:700px){
 
-  /* La sección superior SIEMPRE conserva su lugar: cambia el contenido, no el layout. */
-  #quiz-bridge-mid{
-    display:block !important;
+  /* Sección superior: una sola columna centrada y sin hijos jalándose a los lados */
+  #quiz-bridge-mid,
+  #quiz-bridge-mid .sales-quiz-bridge__inner{
+    width:100% !important;
+    max-width:100% !important;
+    box-sizing:border-box !important;
   }
 
-  /* SIN TEST: CTA Reinicio usa todo el ancho y no existe hueco de mapa. */
+  #quiz-bridge-mid .sales-quiz-bridge__inner{
+    display:block !important;
+    text-align:center !important;
+  }
+
+  #quiz-bridge-mid .quiz-state-original,
+  #quiz-bridge-mid .map-state-summary{
+    width:100% !important;
+    max-width:100% !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+    float:none !important;
+    position:relative !important;
+    left:auto !important;
+    right:auto !important;
+    transform:none !important;
+    text-align:center !important;
+    box-sizing:border-box !important;
+  }
+
+  #quiz-bridge-mid .quiz-state-original > *,
+  #quiz-bridge-mid .map-state-summary > *{
+    margin-left:auto !important;
+    margin-right:auto !important;
+  }
+
+  #quiz-bridge-mid h2,
+  #quiz-bridge-mid p,
+  #quiz-bridge-mid small,
+  #quiz-bridge-mid .sales-quiz-bridge__eyebrow,
+  #quiz-bridge-mid .map-state-eyebrow{
+    width:100% !important;
+    text-align:center !important;
+  }
+
+  #quiz-bridge-mid .sales-quiz-bridge__btn,
+  #quiz-bridge-mid .map-state-btn{
+    width:min(100%, 330px) !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+  }
+
+  /* Sólo un poco menos de blanco antes de "Esto es lo que recibes" */
+  .hero{
+    padding-bottom:10px !important;
+  }
+
+  .mobile-v4-compact{
+    padding-top:10px !important;
+  }
+
+  .v4-section-head{
+    margin-top:5px !important;
+  }
+}
+</style><style id="v4-only-center-and-gap">
+@media(max-width:700px){
+
+  /* ÚNICO ajuste del CTA superior: centrado real independientemente
+     de estilos heredados, flex, transforms o posición previa. */
+  #quiz-bridge-mid .sales-quiz-bridge__btn,
+  #quiz-bridge-mid .map-state-btn{
+    display:flex !important;
+    position:relative !important;
+    left:50% !important;
+    right:auto !important;
+    transform:translateX(-50%) !important;
+    float:none !important;
+
+    width:calc(100% - 28px) !important;
+    max-width:330px !important;
+    box-sizing:border-box !important;
+
+    margin-top:2px !important;
+    margin-bottom:7px !important;
+    margin-left:0 !important;
+    margin-right:0 !important;
+
+    align-items:center !important;
+    justify-content:center !important;
+    text-align:center !important;
+  }
+
+  /* Reducir OTRO POCO el hueco antes de entregables */
+  .hero{
+    padding-bottom:6px !important;
+  }
+
+  .mobile-v4-compact{
+    padding-top:6px !important;
+  }
+
+  .v4-section-head{
+    margin-top:2px !important;
+  }
+}
+</style><style id="v5-only-reduce-gap">
+@media(max-width:700px){
+  .hero{
+    padding-bottom:2px !important;
+  }
+
+  .mobile-v4-compact{
+    padding-top:2px !important;
+  }
+
+  .v4-section-head{
+    margin-top:0 !important;
+  }
+}
+</style><style id="reinicio-test-map-state-v8-css">
+@media(max-width:700px){
+  #quiz-bridge-mid,
+  #quiz-bridge-final{
+    display:block !important;
+    visibility:visible !important;
+    opacity:1 !important;
+  }
+
+  body.needs-quiz #savedResultFab{
+    display:none !important;
+  }
+
+  body.has-saved-map #savedResultFab{
+    display:flex !important;
+  }
+
   body.needs-quiz #mobile-step1-v19,
   body.needs-quiz #mobile-step2-v19{
     left:12px !important;
     right:12px !important;
     width:auto !important;
   }
-  body.needs-quiz #savedResultFab{
-    display:none !important;
-  }
 
-  /* CON TEST: misma barra 80/20 que ya aprobamos. */
   body.has-saved-map #mobile-step1-v19,
   body.has-saved-map #mobile-step2-v19{
     left:12px !important;
     right:calc(20% + 10px) !important;
     width:auto !important;
-  }
-  body.has-saved-map #savedResultFab{
-    display:flex !important;
-    right:12px !important;
-    width:calc(20% - 5px) !important;
   }
 }
 </style></head>
@@ -4296,13 +4416,13 @@ details p{color:var(--muted);line-height:1.6;margin-top:12px}
 <a class="cta js-buy" href="https://pay.hotmart.com/L106914038U" rel="noopener" target="_blank">
           QUIERO EMPEZAR MI REINICIO
         </a>
-<section class="sales-quiz-bridge quiz-new-user-only" id="quiz-bridge-mid">
+<section class="sales-quiz-bridge" id="quiz-bridge-mid">
 <div class="sales-quiz-bridge__inner">
-<span class="sales-quiz-bridge__eyebrow">¿TODAVÍA NO ESTÁS SEGURO?</span>
-<h2>Descubre qué está frenando tu progreso</h2>
-<p>Haz el diagnóstico gratuito y descubre tu perfil antes de decidir.</p>
-<a class="sales-quiz-bridge__btn sales-to-quiz" href="https://alberto619.github.io/quiz-reinicio/">DESCUBRIR MI PERFIL GRATIS <span>→</span></a>
-<small>6 preguntas · resultado inmediato · sin compromiso</small>
+<span class="sales-quiz-bridge__eyebrow quiz-state-original" data-v7-original-text="¿TODAVÍA NO ESTÁS SEGURO?" data-v8-original-text="¿TODAVÍA NO ESTÁS SEGURO?">¿TODAVÍA NO ESTÁS SEGURO?</span>
+<h2 class="quiz-state-original" data-v7-original-text="Descubre qué está frenando tu progreso" data-v8-original-text="Descubre qué está frenando tu progreso">Descubre qué está frenando tu progreso</h2>
+<p class="quiz-state-original" data-v7-original-text="Haz el diagnóstico gratuito y descubre tu perfil antes de decidir." data-v8-original-text="Haz el diagnóstico gratuito y descubre tu perfil antes de decidir.">Haz el diagnóstico gratuito y descubre tu perfil antes de decidir.</p>
+<a class="sales-quiz-bridge__btn sales-to-quiz quiz-state-original" data-v7-original-href="https://alberto619.github.io/quiz-reinicio/" data-v7-original-text="DESCUBRIR MI PERFIL GRATIS →" data-v8-original-href="https://alberto619.github.io/quiz-reinicio/" data-v8-original-text="DESCUBRIR MI PERFIL GRATIS →" href="https://alberto619.github.io/quiz-reinicio/">DESCUBRIR MI PERFIL GRATIS <span>→</span></a>
+<small class="quiz-state-original" data-v7-original-text="6 preguntas · resultado inmediato · sin compromiso" data-v8-original-text="6 preguntas · resultado inmediato · sin compromiso">6 preguntas · resultado inmediato · sin compromiso</small>
 </div></section>
 <div class="cta-sub">Acceso inmediato · Pago procesado por Hotmart</div>
 </div>
@@ -4843,13 +4963,13 @@ details p{color:var(--muted);line-height:1.6;margin-top:12px}
     </a>
 </div>
 </section>
-<section class="sales-quiz-bridge quiz-new-user-only" id="quiz-bridge-final">
+<section class="sales-quiz-bridge" id="quiz-bridge-final">
 <div class="sales-quiz-bridge__inner">
-<span class="sales-quiz-bridge__eyebrow">¿TODAVÍA NO ESTÁS SEGURO?</span>
-<h2>Descubre qué está frenando tu progreso</h2>
-<p>Haz el diagnóstico gratuito y descubre tu perfil antes de decidir.</p>
-<a class="sales-quiz-bridge__btn sales-to-quiz" href="https://alberto619.github.io/quiz-reinicio/">DESCUBRIR MI PERFIL GRATIS <span>→</span></a>
-<small>6 preguntas · resultado inmediato · sin compromiso</small>
+<span class="sales-quiz-bridge__eyebrow" data-v7-original-text="¿TODAVÍA NO ESTÁS SEGURO?" data-v8-original-text="¿TODAVÍA NO ESTÁS SEGURO?">¿TODAVÍA NO ESTÁS SEGURO?</span>
+<h2 data-v7-original-text="Descubre qué está frenando tu progreso" data-v8-original-text="Descubre qué está frenando tu progreso">Descubre qué está frenando tu progreso</h2>
+<p data-v7-original-text="Haz el diagnóstico gratuito y descubre tu perfil antes de decidir." data-v8-original-text="Haz el diagnóstico gratuito y descubre tu perfil antes de decidir.">Haz el diagnóstico gratuito y descubre tu perfil antes de decidir.</p>
+<a class="sales-quiz-bridge__btn sales-to-quiz" data-v7-original-href="https://alberto619.github.io/quiz-reinicio/" data-v7-original-text="DESCUBRIR MI PERFIL GRATIS →" data-v8-original-href="https://alberto619.github.io/quiz-reinicio/" data-v8-original-text="DESCUBRIR MI PERFIL GRATIS →" href="https://alberto619.github.io/quiz-reinicio/">DESCUBRIR MI PERFIL GRATIS <span>→</span></a>
+<small data-v7-original-text="6 preguntas · resultado inmediato · sin compromiso" data-v8-original-text="6 preguntas · resultado inmediato · sin compromiso">6 preguntas · resultado inmediato · sin compromiso</small>
 </div></section>
 <footer class="footer">
 <div class="wrap">© 2026 Alberto Amescua · Método Reinicio 14 · Uso personal</div>
@@ -5217,34 +5337,6 @@ document.addEventListener('DOMContentLoaded', function(){
 <span class="saved-result-fab__orb">↺</span>
 <span class="saved-result-fab__label">VER MI MAPA</span>
 </a>
-<script id="sales-quiz-smart-v2-logic">
-(function(){
-  var KEY='reinicio14_quiz_result_v9';
-  var saved=null;
-  try{saved=localStorage.getItem(KEY);}catch(e){}
-
-  var fab=document.getElementById('savedResultFab');
-  var newBlocks=document.querySelectorAll('.quiz-new-user-only');
-
-  if(saved){
-    if(fab) fab.classList.add('is-visible');
-    newBlocks.forEach(function(el){el.style.display='none';});
-  } else {
-    if(fab) fab.classList.remove('is-visible');
-    newBlocks.forEach(function(el){el.style.display='block';});
-  }
-
-  document.querySelectorAll('.sales-to-quiz').forEach(function(el){
-    el.addEventListener('click',function(){
-      try{
-        if(typeof window.fbq==='function'){
-          window.fbq('trackCustom','SalesToQuiz',{has_saved_result:!!saved});
-        }
-      }catch(e){}
-    },true);
-  });
-})();
-</script>
 <script id="sales-attribution-final-v29">
 (function(){
   function clean(v){
@@ -5395,94 +5487,104 @@ document.addEventListener('DOMContentLoaded', function(){
   }
 })();
 </script>
-<script id="reinicio-test-map-state-final">
+<script id="reinicio-test-map-state-v8">
 (function(){
   var KEY = 'reinicio14_quiz_result_v9';
 
-  function readResult(){
+  var PROFILES = {
+    resR:{name:'CICLO REBOTE',summary:'Tu problema no parece ser empezar. Aparece cuando intentas sostener lo que empezaste.'},
+    resP:{name:'PRIORIDADES DESORDENADAS',summary:'Puede que no necesites esforzarte más. Necesitas colocar mejor ese esfuerzo.'},
+    resS:{name:'TE FALTA UN SISTEMA',summary:'No parece faltarte información. Falta un sistema que sobreviva a tus días imperfectos.'},
+    resA:{name:'RUTINA SATURADA',summary:'Estás intentando exigir más a una rutina que ya tiene demasiadas cosas encima.'}
+  };
+
+  function readSaved(){
     try{
       var raw = localStorage.getItem(KEY);
       if(!raw) return null;
       var data = JSON.parse(raw);
-      return data || null;
+      return data && data.id && PROFILES[data.id] ? data : null;
     }catch(e){
       return null;
     }
   }
 
-  function pick(obj, keys){
-    if(!obj || typeof obj !== 'object') return '';
-    for(var i=0;i<keys.length;i++){
-      var v = obj[keys[i]];
-      if(typeof v === 'string' && v.trim()) return v.trim();
+  function trackSalesToQuiz(hasSaved){
+    try{
+      if(typeof window.fbq === 'function'){
+        window.fbq('trackCustom','SalesToQuiz',{has_saved_result:hasSaved});
+      }
+    }catch(e){}
+  }
+
+  function setBridgeState(bridge, saved){
+    var inner = bridge.querySelector('.sales-quiz-bridge__inner') || bridge;
+    var eyebrow = inner.querySelector('.sales-quiz-bridge__eyebrow');
+    var title = inner.querySelector('h2');
+    var desc = inner.querySelector('p');
+    var btn = inner.querySelector('.sales-quiz-bridge__btn');
+    var note = inner.querySelector('small');
+
+    if(saved){
+      var p = PROFILES[saved.id];
+      if(eyebrow) eyebrow.textContent = 'TU MAPA YA ESTÁ LISTO';
+      if(title) title.textContent = 'Tu perfil: ' + p.name;
+      if(desc) desc.textContent = p.summary;
+      if(btn){
+        btn.textContent = 'VER MI MAPA';
+        btn.setAttribute('href','https://alberto619.github.io/quiz-reinicio/?mapa=1');
+        btn.onclick = function(){ trackSalesToQuiz(true); };
+      }
+      if(note) note.textContent = 'Tu resultado está guardado para que puedas volver cuando lo necesites.';
+    }else{
+      if(eyebrow && eyebrow.dataset.v8OriginalText) eyebrow.textContent = eyebrow.dataset.v8OriginalText;
+      if(title && title.dataset.v8OriginalText) title.textContent = title.dataset.v8OriginalText;
+      if(desc && desc.dataset.v8OriginalText) desc.textContent = desc.dataset.v8OriginalText;
+      if(btn){
+        if(btn.dataset.v8OriginalText) btn.textContent = btn.dataset.v8OriginalText;
+        btn.setAttribute('href', btn.dataset.v8OriginalHref || 'https://alberto619.github.io/quiz-reinicio/');
+        btn.onclick = function(){ trackSalesToQuiz(false); };
+      }
+      if(note && note.dataset.v8OriginalText) note.textContent = note.dataset.v8OriginalText;
     }
-    return '';
+
+    bridge.style.display = 'block';
+    bridge.style.visibility = 'visible';
+    bridge.style.opacity = '1';
   }
 
   function apply(){
-    var bridge = document.getElementById('quiz-bridge-mid');
+    var saved = readSaved();
+    var hasSaved = !!saved;
+
+    var mid = document.getElementById('quiz-bridge-mid');
+    var finalBridge = document.getElementById('quiz-bridge-final');
     var mapFab = document.getElementById('savedResultFab');
     var step1 = document.getElementById('mobile-step1-v19');
     var step2 = document.getElementById('mobile-step2-v19');
-    var result = readResult();
-    var hasResult = !!result;
 
-    document.body.classList.toggle('has-saved-map', hasResult);
-    document.body.classList.toggle('needs-quiz', !hasResult);
+    if(mid) setBridgeState(mid, saved);
+    if(finalBridge) setBridgeState(finalBridge, saved);
 
-    if(bridge){
-      bridge.style.display = 'block';
-
-      var eyebrow = bridge.querySelector('.sales-quiz-bridge__eyebrow');
-      var title = bridge.querySelector('h2');
-      var desc = bridge.querySelector('p');
-      var btn = bridge.querySelector('.sales-quiz-bridge__btn');
-      var note = bridge.querySelector('small');
-
-      if(hasResult){
-        var profile = pick(result, ['profileName','profile','perfil','name','title','resultName','archetype']);
-        var summary = pick(result, ['summary','resumen','description','descripcion','message','mensaje','focus','enfoque']);
-
-        if(eyebrow) eyebrow.textContent = 'TU MAPA YA ESTÁ LISTO';
-        if(title) title.textContent = profile ? ('Tu perfil: ' + profile) : 'Ya identificaste tu punto de partida';
-        if(desc) desc.textContent = summary || 'Ya tienes tu mapa. Úsalo para recordar qué te está frenando y cuál es el siguiente paso que necesitas trabajar.';
-        if(btn){
-          btn.textContent = 'VER MI MAPA';
-          btn.setAttribute('href', '#');
-          btn.onclick = function(ev){
-            ev.preventDefault();
-            if(mapFab) mapFab.click();
-          };
-        }
-        if(note) note.textContent = 'Tu resultado queda guardado para que puedas volver cuando lo necesites.';
-      }else{
-        if(eyebrow) eyebrow.textContent = 'DESCUBRE TU PERFIL GRATIS';
-        if(title) title.textContent = 'Identifica qué te está frenando';
-        if(desc) desc.textContent = 'Responde unas preguntas rápidas y descubre por dónde empezar sin intentar cambiar todo de golpe.';
-        if(btn) btn.onclick = null;
-      }
-    }
+    document.body.classList.toggle('has-saved-map', hasSaved);
+    document.body.classList.toggle('needs-quiz', !hasSaved);
 
     if(mapFab){
-      if(hasResult){
+      if(hasSaved){
         mapFab.classList.add('is-visible');
         mapFab.style.display = 'flex';
+        mapFab.setAttribute('href','https://alberto619.github.io/quiz-reinicio/?mapa=1');
       }else{
         mapFab.classList.remove('is-visible');
         mapFab.style.display = 'none';
       }
     }
 
-    /* No quitamos ni recreamos botones. Sólo cambiamos la geometría por estado. */
     [step1, step2].forEach(function(el){
       if(!el) return;
-      if(hasResult){
-        el.style.left = '12px';
-        el.style.right = 'calc(20% + 10px)';
-      }else{
-        el.style.left = '12px';
-        el.style.right = '12px';
-      }
+      el.style.left = '12px';
+      el.style.right = hasSaved ? 'calc(20% + 10px)' : '12px';
+      el.style.width = 'auto';
     });
   }
 
