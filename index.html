@@ -1518,7 +1518,9 @@ document.addEventListener('click',function(e){
       const resultEl=document.getElementById(rid);
       const mapUrl=resultEl&&resultEl.dataset&&resultEl.dataset.mapUrl;
       if(mapUrl){
-        window.location.assign(mapUrl);
+        setTimeout(function(){
+          window.location.assign(mapUrl);
+        }, 900);
       }else{
         location.hash=rid;
       }
