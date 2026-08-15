@@ -1218,65 +1218,6 @@ h2{
 }(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
 fbq('init','1698998988025454');
 fbq('track','PageView');
-
-(function(){
-  var started = false;
-  var completed = {};
-
-  function attr(){
-    var a = window.ReinicioAttribution || {};
-    return {
-      src: a.src || 'direct',
-      camp: a.camp || ''
-    };
-  }
-
-  function profileFromHash(){
-    var h=(location.hash||'').replace('#','');
-    return {
-      resR:'R',
-      resP:'P',
-      resS:'S',
-      resA:'A'
-    }[h] || '';
-  }
-
-  function trackCompletion(){
-    var profile=profileFromHash();
-    if(profile && !completed[profile]){
-      completed[profile]=true;
-      fbq('trackCustom','QuizComplete',Object.assign({profile:profile},attr()));
-      fbq('track','CompleteRegistration',Object.assign({profile:profile},attr()));
-    }
-  }
-
-  document.addEventListener('click',function(e){
-    var a=e.target.closest && e.target.closest('a');
-    if(!a) return;
-
-    var href=a.getAttribute('href') || '';
-    var text=(a.textContent || '').replace(/\s+/g,' ').trim().toUpperCase();
-
-    // Primer avance real del diagnóstico.
-    if(!started && (href==='#q1' || text.indexOf('DESCUBRIR MI PERFIL')!==-1)){
-      started=true;
-      fbq('trackCustom','QuizStart',attr());
-    }
-
-    // CTA final hacia WhatsApp para recibir el mapa.
-    if(a.classList.contains('whatsapp') && href.indexOf('wa.me/')!==-1){
-      fbq('trackCustom','QuizMapWhatsApp',Object.assign({profile:profileFromHash()},attr()));
-    }
-
-    // CTA final directo hacia Método Reinicio 14.
-    if(href.indexOf('metodoreinicio14')!==-1){
-      fbq('trackCustom','QuizToSales',Object.assign({profile:profileFromHash()},attr()));
-    }
-  });
-
-  window.addEventListener('hashchange',trackCompletion);
-  document.addEventListener('DOMContentLoaded',trackCompletion);
-})();
 </script>
 <style id="reinicio14-sales-palette-quiz-only">
 :root{
@@ -1569,6 +1510,11 @@ document.addEventListener('click',function(e){
       const rid=RESULT_MAP[arr.slice(0,5).join('')]||'resR';
       try{localStorage.setItem(RESULT_KEY,JSON.stringify({id:rid,code:pcode(rid),savedAt:Date.now()}))}catch(_){}
       track('QuizComplete',Object.assign({profile:pcode(rid)},attr()));
+      try{
+        if(typeof fbq==='function'){
+          fbq('track','CompleteRegistration',Object.assign({profile:pcode(rid)},attr()));
+        }
+      }catch(e){}
       const resultEl=document.getElementById(rid);
       const mapUrl=resultEl&&resultEl.dataset&&resultEl.dataset.mapUrl;
       if(mapUrl){
