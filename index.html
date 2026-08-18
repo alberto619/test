@@ -45,6 +45,25 @@
 }
 </style>
 
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1698998988025454');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1698998988025454&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
 </head>
 <body>
 <div class="shell" id="inicio">
@@ -83,4 +102,81 @@
 </main>
 <footer class="footer"><a href="#inicio" class="brand"><span class="brand-dot"></span><span>SOS <b>ANTOJOS</b></span></a><p>Herramienta educativa. No diagnostica ni trata trastornos de la conducta alimentaria.</p><small>© 2026 SOS Antojos</small></footer>
 </div>
+
+<script id="sos-growth-metrics">
+(function () {
+  function send(name, data) {
+    if (typeof window.fbq === 'function') {
+      window.fbq('trackCustom', name, Object.assign({
+        product: 'SOS Antojos',
+        currency: 'MXN',
+        value: 97
+      }, data || {}));
+    }
+  }
+
+  function initSOSMetrics() {
+    var video = document.querySelector('video');
+    var fired = { view:false, start:false, half:false, complete:false };
+
+    if (video) {
+      
+      if ('IntersectionObserver' in window) {
+        var videoObserver = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (!fired.view && entry.isIntersecting && entry.intersectionRatio >= 0.50) {
+              fired.view = true;
+              send('SOSVideoView');
+              videoObserver.disconnect();
+            }
+          });
+        }, { threshold: [0.50] });
+        videoObserver.observe(video);
+      } else {
+        var r = video.getBoundingClientRect();
+        if (!fired.view && r.top < window.innerHeight && r.bottom > 0) {
+          fired.view = true;
+          send('SOSVideoView');
+        }
+      }
+
+      video.addEventListener('play', function () {
+        if (!fired.start) {
+          fired.start = true;
+          send('SOSVideoStart');
+        }
+      }, {passive:true});
+
+      video.addEventListener('timeupdate', function () {
+        if (!fired.half && video.duration && (video.currentTime / video.duration) >= 0.50) {
+          fired.half = true;
+          send('SOSVideo50');
+        }
+      }, {passive:true});
+
+      video.addEventListener('ended', function () {
+        if (!fired.complete) {
+          fired.complete = true;
+          send('SOSVideoComplete');
+        }
+      }, {passive:true});
+    }
+
+    document.querySelectorAll('a[href*="pay.hotmart.com/F107195888D"]').forEach(function (link) {
+      link.addEventListener('click', function () {
+        send('SOSCheckoutClick', {
+          checkout_url: 'https://pay.hotmart.com/F107195888D'
+        });
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSOSMetrics);
+  } else {
+    initSOSMetrics();
+  }
+})();
+</script>
+
 </body></html>
